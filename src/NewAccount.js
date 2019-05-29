@@ -22,14 +22,33 @@ class NewAccount extends React.Component {
         ],
     }
     createAccount = () => { // push data onto firebase
-        const userRef = firebase.database().ref("users");
+        /*const userRef = firebase.database().ref("users");
         const user = {
             name: this.state.name,
             username: this.state.username,
             password: this.state.password,
             log: this.state.log,
         };
-        userRef.push(user);
+        userRef.push(user);*/
+        firebase.auth().createUserWithEmailAndPassword(this.state.username, this.state.password)
+        .then(data => {
+            console.log(data.user.uid);
+            const userRef = firebase.database().ref("/users"); 
+            const new_user = {
+                uid : data.user.uid,
+                name : this.state.name,
+                log : this.state.log,
+            }
+            userRef.push(new_user);
+            // const currentUser = firebase.auth().currentUser;
+            // usersRef.push(user);
+        })
+        .catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+          });
     };
 
     changeName = (input) => {
@@ -49,7 +68,6 @@ class NewAccount extends React.Component {
     }
 
 render(){
-    console.log("render new account")
     return(
         <div className="login-form">
         <br />
