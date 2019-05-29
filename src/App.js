@@ -1,13 +1,17 @@
 import React from 'react';
 import './App.css';
-import FirebaseLog from "./FirebaseLog.js"
+import LogIn from "./LogIn";
 
-export default class App extends React.Component {
-  render(){
+class App extends React.Component {
+render(){
   return (
-    <div >
-      <FirebaseLog />
+    <div className="App">
+        <LogIn />
     </div>
   );
 }
+
 }
+
+export default App;
+
