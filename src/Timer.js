@@ -78,15 +78,17 @@ class Timer extends React.Component {
 
     render(){
         return(
-        <div className="Timer">
-        <header className=" Timer-Header">
-            {this.updateDisplay()}
-        <div style={{ marginTop: "16px"}}>
-                <Button size= "large" type="primary" onClick={()=> {this.startCountDown()}}>Start Timer</Button>
-                <Button size= "large" type="secondary" onClick={()=> {this.pauseCountDown()}}>Pause Timer</Button>
-        </div>
-            
-        </header>
+        <div>
+            <div className = "Timer-Header">
+               <Button size= "large" type="primary" onClick={()=> {}}>Back to Profile</Button>
+            </div>
+            <header className=" Timer-Body">
+                {this.updateDisplay()}
+                <div style={{ marginTop: "16px"}}>
+                    <Button size= "large" type="primary" onClick={()=> {this.startCountDown()}}>Start Timer</Button>
+                    <Button size= "large" type="secondary" onClick={()=> {this.pauseCountDown()}}>Pause Timer</Button>
+                </div>
+            </header>
         </div>
         );
     }

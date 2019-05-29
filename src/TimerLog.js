@@ -1,7 +1,7 @@
 //The Timer class that contains the logic and display for the timer 
 import React from 'react'
 import './TimerLog.css';
-import { version, Button } from "antd";
+import { version, Button, Input, TextArea } from "antd";
 import "antd/dist/antd.css";
 
 
@@ -59,21 +59,31 @@ updatingDetails=(details)=>
 
     render(){
         return(
-        <div className = "TimerLog">
-        <header className ="TimerLog-Body">
-            What did you do? 
-            <div className="TimerLog-Input">
-                Title: 
-            <input onChange={(title)=>{this.updatingTitle(title.target.value)}}/>
+        <div>
+            <div className = "TimerLog-Header">
+                Log your Activity!
             </div>
-            <div className = "TimerLog-Input">
-                Details:
-            <input onChange={(details)=>{this.updatingDetails(details.target.value)}}/>
+            <div className="TimerLog-allInput">
+                <div className="TimerLog-Input">
+                    Title: 
+                    <div className="TimerLog-InputTitle">
+                        <Input size = "large" onChange={(title)=>{this.updatingTitle(title.target.value)}}/>
+                    </div>
+                </div>
+                <div className = "TimerLog-Input">
+                    Details:
+                </div>
+                <div className = "TimerLog-InputDetails">
+                        <Input.TextArea rows={5}  size ="large" onChange={(details)=>{this.updatingDetails(details.target.value)}}/>
+                </div>
+              
             </div>
-            <Button size= "large" type="primary" onClick={()=> {this.logActivity()}}>Log Activity</Button>
-            {console.log(this.state.activity)}
-        </header>
+            <div className= "TimerLog-Footer">
+                <Button size= "large" type="primary" onClick={()=> {this.logActivity()}}>Log Activity</Button>
+                {console.log(this.state.activity)}
+            </div>
         </div>
+       
         );
     }
 }
