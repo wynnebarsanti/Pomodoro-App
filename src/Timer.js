@@ -35,6 +35,7 @@ class Timer extends React.Component {
             this.setState({display_sec : "0" + temp.toString()})
             clearInterval(this.state.intervalHandle);
             this.setState({display_min: "00", display_sec: "00", secondsRemaining: 1500})
+            //------------------------------------------------------------------------------------ROUTE TO TIMERLOG.js HERE
         }
         //If statement that adjusts display for when the seconds go under 10 
         else if(sec < 10) 
@@ -74,13 +75,17 @@ class Timer extends React.Component {
         return (this.state.display_min + ":" + this.state.display_sec)
     }
 
+    routeToProfile()
+    {
+        //------------------------------------------------------------------------------------ROUTE TO PROFILE.js HERE
+    }
     
 
     render(){
         return(
         <div>
             <div className = "Timer-Header">
-               <Button size= "large" type="primary" onClick={()=> {}}>Back to Profile</Button>
+               <Button size= "large" type="primary" onClick={()=> {this.routeToProfile()}}>Back to Profile</Button>
             </div>
             <header className=" Timer-Body">
                 {this.updateDisplay()}

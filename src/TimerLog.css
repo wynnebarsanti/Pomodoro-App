@@ -3,6 +3,7 @@
   }
 
   .TimerLog-Header {
+    
    background: url("https://image.freepik.com/free-photo/blurred-background-blur-bookshelves-book-store-background-education-concept_7190-15.jpg");
    height: 200px;
    background-size: cover; 
@@ -23,26 +24,39 @@
     font-size: 35px;
     color: white;
   }
-  
-  .TimerLog-InputTitle{
-    background-color: #282c34;
-    display: flex;
-    align-items: center;
-    font-size: 20px;
-    color: black;
-    padding-bottom: 15px;
-    padding-left: 40px;
-    padding-top: 25px;
-  }
 
-  .TimerLog-Input{
+  .TimerLog-AllInput
+  {
+    display: inline;
+  }
+  .TimerLog-TitleText
+  {
     background-color: #282c34;
-    display: flex;
     align-items: center;
     font-size: 20px;
     color: white;
     padding-bottom: 15px;
-    padding-left: 20px;
+    padding-right: 200px;
+    padding-top: 10px; 
+  }
+
+
+  .TimerLog-InputTitle{
+    background-color: #282c34;
+    align-items: center;
+    font-size: 20px;
+    color: black;
+    padding-bottom: 15px;
+  }
+
+  .TimerLog-InputDetailText{
+    background-color: #282c34;
+    align-items: center;
+    font-size: 20px;
+    color: white;
+    padding-bottom: 15px;
+    padding-right: 200px;
+    padding-top: 10px; 
   }
 
   .TimerLog-InputDetails{
@@ -51,12 +65,9 @@
     font-size: 20px;
     color: black;
     padding-bottom: 15px;
-    padding-left: 20px;
   }
   
-  .TimerLog-allInput{
-      flex-direction: row;
-  }
+ 
 
   
   .TimerLog-Footer {
