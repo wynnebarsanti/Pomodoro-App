@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import './login.css';
 import { Form, Icon, Input, Button,  } from 'antd';
 import NewAccount from "./NewAccount";
-import FirebaseLog from "./firebaseLog.js"
+import FirebaseLog from "./FirebaseLog.js"
 import firebase from "./firebase.js";
 
 

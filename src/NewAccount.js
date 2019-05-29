@@ -1,5 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
+import './login.css';
+
 
 import { Form, Input, Button } from 'antd';
 import firebase from "./firebase.js";
@@ -49,7 +51,8 @@ class NewAccount extends React.Component {
 render(){
     console.log("render new account")
     return(
-        <div>
+        <div className="login-form">
+        <br />
         <Form>
             <Input
                 placeholder="Name"
