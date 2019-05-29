@@ -1,5 +1,9 @@
 //The Timer class that contains the logic and display for the timer 
 import React from 'react'
+import './Timer.css';
+import { version, Button } from "antd";
+import "antd/dist/antd.css";
+
 
 class Timer extends React.Component {
     constructor(props)
@@ -59,18 +63,30 @@ class Timer extends React.Component {
         this.state.intervalHandle = setInterval(this.tick, 1000);
     }
 
+    pauseCountDown()
+    {
+        clearInterval(this.state.intervalHandle)
+    }
+
     //Displays the timer
     updateDisplay()
     {
         return (this.state.display_min + ":" + this.state.display_sec)
     }
 
+    
 
     render(){
         return(
-        <div>
-            <button onClick={()=> {this.startCountDown()}}> Start Timer </button>
+        <div className="Timer">
+        <header className=" Timer-Header">
             {this.updateDisplay()}
+        <div style={{ marginTop: "16px"}}>
+                <Button size= "large" type="primary" onClick={()=> {this.startCountDown()}}>Start Timer</Button>
+                <Button size= "large" type="secondary" onClick={()=> {this.pauseCountDown()}}>Pause Timer</Button>
+        </div>
+            
+        </header>
         </div>
         );
     }
