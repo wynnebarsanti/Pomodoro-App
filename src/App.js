@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import LogIn from "./LogIn";
+import Profile from "./Profile";
 
 class App extends React.Component {
 render(){
