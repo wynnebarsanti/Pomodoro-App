@@ -1,7 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 
-import { Form, Icon, Input, Button, Checkbox, TextField } from 'antd';
+import { Form, Input, Button } from 'antd';
 import firebase from "./firebase.js";
 
 
@@ -20,14 +20,14 @@ class NewAccount extends React.Component {
         ],
     }
     createAccount = () => { // push data onto firebase
-        const usersRef = firebase.database().ref("users");
+        const userRef = firebase.database().ref("users");
         const user = {
             name: this.state.name,
             username: this.state.username,
             password: this.state.password,
             log: this.state.log,
         };
-        usersRef.push(user);
+        userRef.push(user);
     };
 
     changeName = (input) => {
@@ -47,6 +47,7 @@ class NewAccount extends React.Component {
     }
 
 render(){
+    console.log("render new account")
     return(
         <div>
         <Form>

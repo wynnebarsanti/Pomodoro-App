@@ -1,5 +1,6 @@
 import React from "react";
 import firebase from './firebase.js';
+import Profile from "./Profile.js";
 
 export default class FirebaseLog extends React.Component{
     constructor(props){
@@ -12,18 +13,21 @@ export default class FirebaseLog extends React.Component{
 
     componentDidMount(){
         const userRef = firebase.database().ref("users");
+        console.log("after userref")
         userRef.on('value', (snapshot) => {
+            console.log("got here")
             let users = snapshot.val();
+            console.log(users);
             let data = [];
             for(let user in users){
-                if( this.props.username == users[user].username){
-                data.push({
-                    name : users[user].name,
-                    log : users[user].log,
-                    dates : users[user].dates,
-                })
-                break;
-            }
+                if( this.props.username === users[user].username){
+                    data.push({
+                        name : users[user].name,
+                        log : users[user].log,
+                        //dates : users[user].dates,
+                    })
+                    break;
+                }
             }
             this.setState({
                 userData: data
@@ -31,9 +35,16 @@ export default class FirebaseLog extends React.Component{
             console.log(this.state.userData)
         })
     }
+
     render(){
+        console.log("gets to firebaselog")
+        console.log(this.props.username);
+
         return(
-            <Profile userData={this.state.userData}/>
+            <div>
+            {/* <Profile userData={this.state.userData}/> */}
+
+            </div>
         )
     }
 }

@@ -4,6 +4,9 @@ import 'antd/dist/antd.css';
 import './login.css';
 import { Form, Icon, Input, Button,  } from 'antd';
 import NewAccount from "./NewAccount";
+import FirebaseLog from "./firebaseLog.js"
+import firebase from "./firebase.js";
+
 
 class LogIn extends React.Component{
 
@@ -11,6 +14,7 @@ class LogIn extends React.Component{
         username: "",
         password: "",
         registerClicked: false,
+        logInClicked: false,
     }
 
     // changes the stored username in state based on user input
@@ -29,19 +33,20 @@ class LogIn extends React.Component{
 
     // if they enter info and login... 
     handleLogIn = () => {
-
+        this.setState({
+            logInClicked: true,
+        })
     }
 
     register = () => {
-        console.log("register clicked")
         this.setState({
             registerClicked: true
         })
-        console.log(this.state.registerClicked)
     }
 
     
     render(){
+        console.log('render login')
         return(
             <div className="login">
                 <h1>Pomodoro App</h1>
@@ -68,6 +73,7 @@ class LogIn extends React.Component{
 
                 </Form>
                 {this.state.registerClicked ? <NewAccount /> : <div></div>}
+                {this.state.logInClicked ? <FirebaseLog username={this.state.username}/> : <div></div>}
             </div>
         )
     }
