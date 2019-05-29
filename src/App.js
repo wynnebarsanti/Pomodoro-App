@@ -4,6 +4,7 @@ import LogIn from "./LogIn";
 
 class App extends React.Component {
 render(){
+  console.log('Render app')
   return (
     <div className="App">
         <LogIn />
@@ -14,3 +15,4 @@ render(){
 }
 
 export default App;
+
