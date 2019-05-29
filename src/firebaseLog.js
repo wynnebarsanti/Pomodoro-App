@@ -33,7 +33,7 @@ export default class FirebaseLog extends React.Component{
                 userData: data
             });
             console.log(this.state.userData)
-        })
+        }).catch(err=>console.log(err))
     }
 
     render(){
