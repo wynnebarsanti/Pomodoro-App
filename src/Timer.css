@@ -3,6 +3,18 @@
   }
 
   .Timer-Header {
+    background: url("https://image.freepik.com/free-photo/blurred-background-blur-bookshelves-book-store-background-education-concept_7190-15.jpg");
+    height: 200px;
+    background-size: cover; 
+    background-position: center; 
+    font-size: 60px; 
+    color: black;
+    display: flex; 
+    align-items: flex-end; 
+    justify-content: space-between;
+   } 
+
+  .Timer-Body {
     background-color: #282c34;
     min-height: 100vh;
     display: flex;
