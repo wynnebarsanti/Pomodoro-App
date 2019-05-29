@@ -92,17 +92,17 @@ updatingDetails=(details)=>
             </div>
             
                 <div className="TimerLog-TitleText">
-                    Title: 
+        
                 </div>
                 <div className="TimerLog-InputTitle">
-                        <Input style={{ width: '25%' }} size = "large" onChange={(title)=>{this.updatingTitle(title.target.value)}}/>
+                        <Input style={{ width: '25%' }} placeholder="Title of Activity" size = "large" onChange={(title)=>{this.updatingTitle(title.target.value)}}/>
                 </div>
         
                 <div className = "TimerLog-InputDetailText">
-                    Details:
+        
                 </div>
                 <div className = "TimerLog-InputDetails">
-                        <Input.TextArea style={{ width: '25%' }} rows={5}  size ="large" onChange={(details)=>{this.updatingDetails(details.target.value)}}/>
+                        <Input.TextArea style={{ width: '25%' }} size = "large" placeholder="Activity Details" rows={5}  size ="large" onChange={(details)=>{this.updatingDetails(details.target.value)}}/>
                 </div>
             <div className= "TimerLog-Footer">
                 <Button size= "large" type="primary" onClick={()=> {this.logActivity()}}>Log Activity</Button>
