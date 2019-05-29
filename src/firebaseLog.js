@@ -8,6 +8,7 @@ export default class FirebaseLog extends React.Component{
         this.state = {
             userData : [],
         }
+        console.log(this.props.username);
     }
     // username taken in through props as this.props.username
 
@@ -20,7 +21,7 @@ export default class FirebaseLog extends React.Component{
             console.log(users);
             let data = [];
             for(let user in users){
-                if( this.props.username === users[user].username){
+                if( this.props.username == users[user].username){
                     data.push({
                         name : users[user].name,
                         log : users[user].log,
@@ -33,12 +34,11 @@ export default class FirebaseLog extends React.Component{
                 userData: data
             });
             console.log(this.state.userData)
-        })
+        }).catch(err=>console.log(err))
     }
 
     render(){
         console.log("gets to firebaselog")
-        console.log(this.props.username);
 
         return(
             <div>

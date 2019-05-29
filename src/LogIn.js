@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import './login.css';
 import { Form, Icon, Input, Button,  } from 'antd';
 import NewAccount from "./NewAccount";
-import FirebaseLog from "./FirebaseLog.js"
+import FirebaseLog from "./firebaseLog.js"
 import firebase from "./firebase.js";
 
 
@@ -73,7 +73,7 @@ class LogIn extends React.Component{
 
                 </Form>
                 {this.state.registerClicked ? <NewAccount /> : <div></div>}
-                {this.state.logInClicked ? <FirebaseLog username={this.state.username}/> : <div></div>}
+               
             </div>
         )
     }
@@ -82,6 +82,7 @@ class LogIn extends React.Component{
 
 export default LogIn;
 
+//{this.state.logInClicked ? <FirebaseLog username={this.state.username}/> : <div></div>}
 // const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(LogIn);
 
 // ReactDOM.render(<WrappedNormalLoginForm />, document.getElementById('container'));
