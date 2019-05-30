@@ -10,7 +10,7 @@ class TimerBreak extends React.Component {
     constructor(props)
     {
         super(props);
-        this.state = {display_sec: "00", display_min: "05", secondsRemaining: 300, intervalHandle: "", redirect: false}
+        this.state = {display_sec: "00", display_min: "05", secondsRemaining: 299, intervalHandle: "", redirect: false}
     }
 
     //Binding Prevents async errors from occuring
