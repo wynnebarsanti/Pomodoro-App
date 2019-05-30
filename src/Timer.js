@@ -10,7 +10,7 @@ class Timer extends React.Component {
     constructor(props)
     {
         super(props);
-        this.state = {display_sec: "00", display_min: "25", secondsRemaining: 1500, intervalHandle: "", redirect: false}
+        this.state = {display_sec: "00", display_min: "25", secondsRemaining: 1499, intervalHandle: "", redirect: false}
     }
 
     //Binding Prevents async errors from occuring
