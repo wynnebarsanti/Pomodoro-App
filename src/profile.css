@@ -46,10 +46,16 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 5px;
-    color: rgb(223, 223, 223);
-
+    color : black;
 }   
 .log-details {
+    text-align: left;
+    padding: 10px;
+    color: black;
+}
+
+.log-date {
+    background : rgba(46, 240, 255, 0.404);
     text-align: left;
     padding: 10px;
     color: black;
