@@ -3,14 +3,14 @@ import React from 'react'
 import './Timer.css';
 import { version, Button } from "antd";
 import "antd/dist/antd.css";
-import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Redirect, Route, Link } from 'react-router-dom'
 
 
-class Timer extends React.Component {
+class TimerBreak extends React.Component {
     constructor(props)
     {
         super(props);
-        this.state = {display_sec: "00", display_min: "25", secondsRemaining: 1500, intervalHandle: "", redirect: false}
+        this.state = {display_sec: "00", display_min: "05", secondsRemaining: 300, intervalHandle: "", redirect: false}
     }
 
     //Binding Prevents async errors from occuring
@@ -77,30 +77,25 @@ class Timer extends React.Component {
         return (this.state.display_min + ":" + this.state.display_sec)
     }    
 
-
-    //Redirects to the Timer Log if "redirect" is true 
+    //Redirects to the timer page if "redirect" is true 
     renderRedirect = () => 
     {
         if (this.state.redirect) 
         {
-            return <Redirect to='/TimerLog' />
+          return <Redirect to='/Timer' />
         }
     }
     
 
-  render(){
+    render(){
         return(
         <div>
             <div className = "Timer-Header">
-               <Button 
-                    size= "large"
-                    type="primary">
-                    <Link to='/Profile'>Back to Profile</Link>
-                </Button>
+               Take a Break!
                 <Button
                     size= "large"
-                    type="primary">
-                    <Link to='/TimerLog'>Stop Timer and Log Activity</Link>
+                    type="primary"> 
+                   <Link to='/Profile'>Exit Back to Profile</Link>
                 </Button>                
                     
             </div>
@@ -110,11 +105,11 @@ class Timer extends React.Component {
                     <Button size= "large" type="primary" onClick={()=> {this.startCountDown()}}>Start Timer</Button>
                     <Button size= "large" type="secondary" onClick={()=> {this.pauseCountDown()}}>Pause Timer</Button>
                 </div>
+                {this.renderRedirect()}
             </header>
-            {this.renderRedirect()}
         </div>
         );
     }
 }
 
-export default Timer
+export default TimerBreak
