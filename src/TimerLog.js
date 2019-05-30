@@ -75,27 +75,47 @@ class TimerLog extends React.Component {
     
 updateFirebase = () => {
     let currentUser = firebase.auth().currentUser;
+    console.log(currentUser)
     console.log(currentUser.uid);
-    const currUid = currentUser.uid;
+    const authUid = currentUser.uid;
     console.log(this.state.activity);
 
-    const usersRef = firebase.database().ref("users");
+    var usersRef = firebase.database().ref("/users" );
+    console.log(usersRef)
+    let userID="";
+    let log=[];
     usersRef.on('value', (snapshot) => {
         let users = snapshot.val();
+        console.log(users);
         for (let user in users) {
-            if( currUid == users[user].uid){
-                console.log(users[user].log)
-                users[user].log.push({
-                    date: this.state.activity[2],
-                    time: "no time",
-                    work: {
-                        title: this.state.activity[0],
-                        details: this.state.activity[1],
-                    }
-                })
+            if( authUid == users[user].uid){
+                console.log(user);
+                userID=user;
+                log=users[user].log;
             }
         }
     })
+    // log.push({
+    //         date: this.state.activity[2],
+    //         time: 25,
+    //         work: {
+    //             title: this.state.activity[0],
+    //             details: this.state.activity[1]
+    //         }
+        
+    // })
+    let newItem={
+                date: this.state.activity[2],
+                time: 25, //formatting fix this
+                work: {
+                    title: this.state.activity[0],
+                    details: this.state.activity[1]
+                }
+            
+        }
+    var logRef = firebase.database().ref(`/users/${userID}/log/`);
+    console.log(logRef);
+    logRef.push(newItem);
 }
 
 //Updates the state of title everytime the title input box changes

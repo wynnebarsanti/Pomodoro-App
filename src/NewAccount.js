@@ -47,7 +47,7 @@ class NewAccount extends React.Component {
             const new_user = {
                 uid : data.user.uid,
                 name : this.state.name,
-                log : this.state.log,
+                log : []
             }
             userRef.push(new_user);
             // const currentUser = firebase.auth().currentUser;

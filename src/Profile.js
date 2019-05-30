@@ -18,10 +18,10 @@ class Profile extends React.Component {
     // called when you want to display recent activity
 displayLog = () => {
     let userObject= this.state.userObject;
-    
-    if (userObject.log.length == 0){ return (<div> Welcome! Click on the Timer to start your log! </div>)}
+    console.log(userObject)
+    if (userObject.log == undefined){ return (<div> Welcome! Click on the Timer to start your log! </div>)}
 
-    return userObject.log.map(
+    return userObject.log.map( // change to (let item in log)
         (item) => {
             return (
                 <div className="log">
