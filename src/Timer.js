@@ -4,7 +4,7 @@ import './Timer.css';
 import { version, Button } from "antd";
 import "antd/dist/antd.css";
 import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom'
-
+import firebase from "./firebase.js";
 
 class Timer extends React.Component {
     constructor(props)
@@ -37,6 +37,7 @@ class Timer extends React.Component {
             clearInterval(this.state.intervalHandle);
             this.setState({display_min: "00", display_sec: "00", secondsRemaining: 1500})
             this.setState({redirect: true})
+            this.sendUID();
             //------------------------------------------------------------------------------------ROUTE TO TIMERLOG.js HERE
         }
         //If statement that adjusts display for when the seconds go under 10 
@@ -87,6 +88,31 @@ class Timer extends React.Component {
         }
     }
     
+            
+    //Sends UID to the Profile Page
+    sendUID = () => {
+        this.exitTimer()
+        firebase.auth().onAuthStateChanged(user => {
+          if (user) {
+              console.log("user is signed in")
+              console.log(user.uid);
+              //let uid=currentUser[user].uid;
+              console.log(user.uid + "Inside timerbreak");
+            //let data = this.getData(currentUser);
+            this.props.history.push({pathname: '/Profile', state: {userUID: user.uid}});
+          } else {
+            // No user is signed in.
+            console.log("Invalid Username or Password")
+          }
+        });
+  }
+
+//Kills the timer when a button is clicked
+exitTimer()
+{
+    clearInterval(this.state.intervalHandle);
+    this.setState({display_min: "00", display_sec: "00", secondsRemaining: 1500})
+}
 
   render(){
         return(
@@ -94,12 +120,12 @@ class Timer extends React.Component {
             <div className = "Timer-Header">
                <Button 
                     size= "large"
-                    type="primary">
-                    <Link to='/Profile'>Back to Profile</Link>
+                    type="primary" onClick={() => {this.sendUID()}}>
+                    Back to Profile
                 </Button>
                 <Button
                     size= "large"
-                    type="primary">
+                    type="primary" onClick={() => {this.exitTimer()}}> 
                     <Link to='/TimerLog'>Stop Timer and Log Activity</Link>
                 </Button>                
                     

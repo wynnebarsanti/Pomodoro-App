@@ -3,6 +3,7 @@ import React from 'react'
 import './Timer.css';
 import { version, Button } from "antd";
 import "antd/dist/antd.css";
+import firebase from "./firebase.js";
 import { BrowserRouter as Router, Redirect, Route, Link } from 'react-router-dom'
 
 
@@ -10,7 +11,9 @@ class TimerBreak extends React.Component {
     constructor(props)
     {
         super(props);
-        this.state = {display_sec: "00", display_min: "05", secondsRemaining: 299, intervalHandle: "", redirect: false}
+        this.state = {display_sec: "00", display_min: "05", secondsRemaining: 299, intervalHandle: "", redirect: false,
+        uid: ""
+    }
     }
 
     //Binding Prevents async errors from occuring
@@ -37,7 +40,7 @@ class TimerBreak extends React.Component {
             clearInterval(this.state.intervalHandle);
             this.setState({display_min: "00", display_sec: "00", secondsRemaining: 1500})
             this.setState({redirect: true})
-            //------------------------------------------------------------------------------------ROUTE TO TIMERLOG.js HERE
+        //------------------------------------------------------------------------------------ROUTE TO TIMERLOG.js HERE
         }
         //If statement that adjusts display for when the seconds go under 10 
         else if(sec < 10) 
@@ -82,10 +85,36 @@ class TimerBreak extends React.Component {
     {
         if (this.state.redirect) 
         {
-          return <Redirect to='/Timer' />
+            this.exitTimer()
+            return <Redirect to='/Timer' />
         }
     }
-    
+        
+    //Sends UID to the Profile Page
+    sendUID = () => {
+        this.exitTimer();
+        firebase.auth().onAuthStateChanged(user => {
+          if (user) {
+              console.log("user is signed in")
+              console.log(user.uid);
+              //let uid=currentUser[user].uid;
+              console.log(user.uid + "Inside timerbreak");
+            //let data = this.getData(currentUser);
+            this.props.history.push({pathname: '/Profile', state: {userUID: user.uid}});
+          } else {
+            // No user is signed in.
+            console.log("Invalid Username or Password")
+          }
+        });
+  }
+
+  //Kills the timer when a button is clicked
+exitTimer()
+{
+    clearInterval(this.state.intervalHandle);
+    this.setState({display_min: "00", display_sec: "00", secondsRemaining: 1500})
+}
+
 
     render(){
         return(
@@ -94,8 +123,8 @@ class TimerBreak extends React.Component {
                Take a Break!
                 <Button
                     size= "large"
-                    type="primary"> 
-                   <Link to='/Profile'>Exit Back to Profile</Link>
+                    type="primary" onClick={() => {this.sendUID()}}>
+                    Back to Profile
                 </Button>                
                     
             </div>

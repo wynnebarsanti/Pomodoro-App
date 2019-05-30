@@ -131,15 +131,38 @@ updatingDetails=(details)=>
 }
 
 
+        
+//Sends UID to the Profile Page
+sendUID = () => {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+          console.log("user is signed in")
+          console.log(user.uid);
+          //let uid=currentUser[user].uid;
+          console.log(user.uid + "Inside timerbreak");
+        //let data = this.getData(currentUser);
+        this.props.history.push({pathname: '/Profile', state: {userUID: user.uid}});
+      } else {
+        // No user is signed in.
+        console.log("Invalid Username or Password")
+      }
+    });
+}
+
+
     render(){
         return(
         <div>
             <div className = "TimerLog-Header">
-                Log your Activity!
+                <Button
+                    size= "large"
+                    type="primary" onClick={() => {this.sendUID()}}>
+                        Back to Profile
+                </Button>
                 <Button
                     size= "large"
                     type="primary">
-                    <Link to='/Profile'>Back to Profile</Link>
+                    <Link to='/TimerBreak'>Take a Break</Link>
                 </Button>
             </div>
             
