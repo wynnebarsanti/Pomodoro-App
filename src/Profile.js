@@ -19,7 +19,7 @@ class Profile extends React.Component {
 displayLog = () => {
     let userObject= this.state.userObject;
     
-    if (userObject.log.length == 0){ <div> Welcome! Click on the Timer to start your log! </div>}
+    if (userObject.log.length == 0){ return (<div> Welcome! Click on the Timer to start your log! </div>)}
 
     return userObject.log.map(
         (item) => {

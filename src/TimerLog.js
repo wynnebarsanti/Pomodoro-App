@@ -5,6 +5,7 @@ import { version, Button, Input, TextArea } from "antd";
 import "antd/dist/antd.css";
 import { exportDefaultSpecifier } from '@babel/types';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import firebase from "./firebase"
 
 class TimerLog extends React.Component {
     constructor(props)
@@ -66,11 +67,37 @@ class TimerLog extends React.Component {
         }
 
         //Pushes the temp_dates array to the activity array
-        this.state.activity.push(dateString)
+        this.state.activity.push(dateString);
+        this.updateFirebase();
         //------------------------------------------------------------------------------------SEND DATA TO FIREBASE HERE
         //------------------------------------------------------------------------------------ROUTE BACK TO PROFILE.js HERE
     }
     
+updateFirebase = () => {
+    let currentUser = firebase.auth().currentUser;
+    console.log(currentUser.uid);
+    const currUid = currentUser.uid;
+    console.log(this.state.activity);
+
+    const usersRef = firebase.database().ref("users");
+    usersRef.on('value', (snapshot) => {
+        let users = snapshot.val();
+        for (let user in users) {
+            if( currUid == users[user].uid){
+                console.log(users[user].log)
+                users[user].log.push({
+                    date: this.state.activity[2],
+                    time: "no time",
+                    work: {
+                        title: this.state.activity[0],
+                        details: this.state.activity[1],
+                    }
+                })
+            }
+        }
+    })
+}
+
 //Updates the state of title everytime the title input box changes
 updatingTitle=(title)=>
 {
@@ -111,7 +138,6 @@ updatingDetails=(details)=>
                 </div>
             <div className= "TimerLog-Footer">
                 <Button size= "large" type="primary" onClick={()=> {this.logActivity()}}>Log Activity</Button>
-                {console.log(this.state.activity)}
             </div>
             </div>
        
