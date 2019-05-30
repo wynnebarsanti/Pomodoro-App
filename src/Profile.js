@@ -3,35 +3,25 @@ import './profile.css';
 import 'antd/dist/antd.css';
 import { Button } from 'antd';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import firebase from "./firebase.js";
 
 
 class Profile extends React.Component {
 
     state = {
-        name: "Name",
-        log: [
-            {
-                date: "May 20th",
-                time: 18,
-                work:{
-                    title: "Express Project",
-                    details: "Created an Express backend for a simple author search"
-                }
-            },
-            {
-                date: "May 25th",
-                time: 25,
-                work: {
-                    title: "Restaurant Project",
-                    details: "Created an app that displayed restaurants based on location"
-                }
-            },
-        ]
+        userObject: {
+            log: [],
+            display: false // decides whether or not we call displayLog or not
+        },
     }
 
+    // called when you want to display recent activity
 displayLog = () => {
-    let log = this.state.log;
-    return log.map(
+    let userObject= this.state.userObject;
+    
+    if (userObject.log.length == 0){ <div> Welcome! Click on the Timer to start your log! </div>}
+
+    return userObject.log.map(
         (item) => {
             return (
                 <div className="log">
@@ -48,12 +38,11 @@ displayLog = () => {
 }
 
 render(){
-    //console.log(this.props.userData);
     return(
         <body>
             <div className="header">
 
-                <b>Hello, {this.state.name}!</b>
+                <b>Hello, {this.state.userObject.name}!</b>
               
                 <Button 
                     className="button-timer" 
@@ -65,9 +54,9 @@ render(){
 
             <div className="body">
 
-                <div className="activity-header">Recent Activity</div>
+                <div className="activity-header"><b>Recent Activity</b></div>
 
-                {this.displayLog()}
+                {this.state.display ? this.displayLog() : <div></div>}
                 
                 <br/><br/><br/><br/><br/><br/>
             </div>
@@ -75,6 +64,32 @@ render(){
 
     )
 }
+
+componentDidMount=()=>{
+        // if the login info is correct, retrieve user data and pass it to Profile page
+
+            const currUid = this.props.location.state.userUID; // pass in the logged in user's uid
+            console.log("inside componentDidMount in Profile")
+            console.log(currUid);
+
+            const userRef = firebase.database().ref("users"); // access all users
+            userRef.on('value', (snapshot) => {
+            let users = snapshot.val();
+            for(let user in users){
+                if( currUid == users[user].uid){    // check for a user with a matching uid
+                    const userObject= {             // if found, create a new user object that will be used to display data
+                        name: users[user].name,
+                        log: users[user].log,
+                        uid: users[user].uid
+                    }
+                    console.log(userObject);
+                    this.setState({userObject: userObject, display: true}) // mark display as true
+                    break;
+
+                }
+            }
+        })
+    }
 }
 
 export default Profile;

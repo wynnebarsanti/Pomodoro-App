@@ -7,7 +7,7 @@ import NewAccount from "./NewAccount";
 import Profile from './Profile.js';
 import FirebaseLog from "./firebaseLog.js"
 import firebase from "./firebase.js";
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
 
 
 class LogIn extends React.Component{
@@ -16,7 +16,6 @@ class LogIn extends React.Component{
         username: "",
         password: "",
         userData: [],
-        registerClicked: false,
         //logInClicked: false,
     }
 
@@ -39,6 +38,8 @@ class LogIn extends React.Component{
     handleLogIn = () => {
         firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password)
         .then(data =>{
+            console.log("data from sign in")
+            console.log(data)
             const currentUser = firebase.auth().currentUser;
             this.checkSignin(currentUser);
         }
@@ -55,48 +56,17 @@ class LogIn extends React.Component{
     checkSignin = (currentUser) => {
           firebase.auth().onAuthStateChanged(user => {
             if (user) {
-              console.log("User is signed in!")
-              const userRef = firebase.database().ref("users");
-              this.getData(currentUser);
-              
+                console.log("user is signed in")
+                console.log(user.uid);
+                //let uid=currentUser[user].uid;
+                //console.log(uid);
+              //let data = this.getData(currentUser);
+              this.props.history.push({pathname: '/Profile', state: {userUID: user.uid}});
             } else {
               // No user is signed in.
               console.log("Invalid Username or Password")
             }
           });
-    }
-
-    // if the login info is correct, retrieve user data and pass it to Profile page
-    getData = (currentUser) => {
-        const userRef = firebase.database().ref("users");
-        userRef.on('value', (snapshot) => {
-        let users = snapshot.val();
-        const data = [];
-        for(let user in users){
-            if( currentUser.uid == users[user].uid){
-                console.log(users[user].name);
-                console.log(users[user].log[0])
-                data.push({
-                    name : users[user].name,
-                    log : users[user].log,
-                    //dates : users[user].dates,
-                    })
-                    break;
-                }
-            }
-            this.setState({
-                userData: data
-            });
-            console.log(this.state.userData);
-            return(<Profile userData={this.state.userData}/>)
-        })
-    }
-
-
-    register = () => {
-        this.setState({
-            registerClicked: true
-        })
     }
 
     
@@ -119,7 +89,8 @@ class LogIn extends React.Component{
                         />
 
                         <Button type="primary" htmlType="submit" className="login-form-button">
-                            <Link to='/Profile'>Log In</Link>
+                            Log in
+                            {/* <Link to='/Profile'>Log In</Link> */}
                         </Button>
 
                         <div>Don't Have an Account? Create one now!</div>
@@ -128,7 +99,6 @@ class LogIn extends React.Component{
                         </Button>
 
                 </Form>
-                {/* {this.state.registerClicked ? <NewAccount /> : <div></div>} */}
                
             </div>
         )

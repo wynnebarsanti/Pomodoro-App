@@ -14,10 +14,21 @@ class NewAccount extends React.Component {
         password: "",
         log: [
             {
-                date: "May29",
-                time: "25 min",
-                content: "firebase project"
-            }
+                date: "May 20th",
+                time: 18,
+                work:{
+                    title: "Express Project",
+                    details: "Created an Express backend for a simple author search"
+                }
+            },
+            {
+                date: "May 25th",
+                time: 25,
+                work: {
+                    title: "Restaurant Project",
+                    details: "Created an app that displayed restaurants based on location"
+                }
+            },
         ],
     }
     createAccount = () => { // push data onto firebase
