@@ -20,22 +20,36 @@ displayLog = () => {
     let userObject= this.state.userObject;
     console.log(userObject)
     if (userObject.log == undefined){ return (<div> Welcome! Click on the Timer to start your log! </div>)}
-
-    return userObject.log.map( // change to (let item in log)
-        (item) => {
+    else{
+    //return //userObject.log.map( // change to (let item in log)
+        //(item) => {
+            console.log(userObject.log);
+            const output = [];
+            for(let item in userObject.log){
+                output.push({
+                    title : userObject.log[item].work.title,
+                    details : userObject.log[item].work.details,
+                });
+            }
+            console.log(output);
             return (
-                <div className="log">
+                output.map((user) =>{
+                    return(
+                   <div className="log">
                     <div className="log-title">
-                        <b>Project: {item.work.title}</b>
+                        <b>Project: {user.title};</b>
                     </div>
                     <div className="log-details">
-                        Details: {item.work.details}
+                        Details: {user.details};
                     </div>
                 </div>
-            )
+                    )
+                }
+                ));
+            }
         }
-    )
-}
+       // }
+    //)
 
 render(){
     return(
