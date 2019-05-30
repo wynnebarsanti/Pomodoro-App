@@ -2,6 +2,8 @@ import React from 'react';
 import './profile.css';
 import 'antd/dist/antd.css';
 import { Button } from 'antd';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+
 
 class Profile extends React.Component {
 
@@ -53,7 +55,12 @@ render(){
 
                 <b>Hello, {this.state.name}!</b>
               
-                <Button className="button-timer" size="large" type="primary">Start Timer</Button>
+                <Button 
+                    className="button-timer" 
+                    size="large" 
+                    type="primary">
+                    <Link to='/Timer'>Start Timer</Link>
+                </Button>
             </div>
 
             <div className="body">

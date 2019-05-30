@@ -7,6 +7,7 @@ import NewAccount from "./NewAccount";
 import Profile from './Profile.js';
 import FirebaseLog from "./firebaseLog.js"
 import firebase from "./firebase.js";
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 
 class LogIn extends React.Component{
@@ -118,14 +119,16 @@ class LogIn extends React.Component{
                         />
 
                         <Button type="primary" htmlType="submit" className="login-form-button">
-                            Log in
+                            <Link to='/Profile'>Log In</Link>
                         </Button>
 
                         <div>Don't Have an Account? Create one now!</div>
-                        <Button type="secondary" onClick={this.register}>Register</Button>
+                        <Button type="secondary" >
+                            <Link to='/NewAccount'>Register</Link>
+                        </Button>
 
                 </Form>
-                {this.state.registerClicked ? <NewAccount /> : <div></div>}
+                {/* {this.state.registerClicked ? <NewAccount /> : <div></div>} */}
                
             </div>
         )

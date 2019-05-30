@@ -3,6 +3,7 @@ import React from 'react'
 import './Timer.css';
 import { version, Button } from "antd";
 import "antd/dist/antd.css";
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 
 class Timer extends React.Component {
@@ -73,19 +74,23 @@ class Timer extends React.Component {
     updateDisplay()
     {
         return (this.state.display_min + ":" + this.state.display_sec)
-    }
-
-    routeToProfile()
-    {
-        //------------------------------------------------------------------------------------ROUTE TO PROFILE.js HERE
-    }
-    
+    }    
 
     render(){
         return(
         <div>
             <div className = "Timer-Header">
-               <Button size= "large" type="primary" onClick={()=> {this.routeToProfile()}}>Back to Profile</Button>
+               <Button 
+                    size= "large"
+                    type="primary">
+                    <Link to='/Profile'>Back to Profile</Link>
+                </Button>
+                <Button
+                    size= "large"
+                    type="primary">
+                    <Link to='/TimerLog'>Stop Timer and Log Activity</Link>
+                </Button>                
+                    
             </div>
             <header className=" Timer-Body">
                 {this.updateDisplay()}

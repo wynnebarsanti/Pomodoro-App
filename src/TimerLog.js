@@ -4,7 +4,7 @@ import './TimerLog.css';
 import { version, Button, Input, TextArea } from "antd";
 import "antd/dist/antd.css";
 import { exportDefaultSpecifier } from '@babel/types';
-
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 class TimerLog extends React.Component {
     constructor(props)
@@ -89,6 +89,11 @@ updatingDetails=(details)=>
         <div>
             <div className = "TimerLog-Header">
                 Log your Activity!
+                <Button
+                    size= "large"
+                    type="primary">
+                    <Link to='/Profile'>Back to Profile</Link>
+                </Button>
             </div>
             
                 <div className="TimerLog-TitleText">

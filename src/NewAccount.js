@@ -1,8 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './login.css';
-
-
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { Form, Input, Button } from 'antd';
 import firebase from "./firebase.js";
 
@@ -69,8 +68,8 @@ class NewAccount extends React.Component {
 
 render(){
     return(
-        <div className="login-form">
-        <br />
+        <div className="login">
+        <h2>Please Enter Your Information:</h2>
         <Form>
             <Input
                 placeholder="Name"
@@ -85,10 +84,13 @@ render(){
                 type="password"
                 onChange={(e)=>this.changePassword(e.target.value)}
             />
+            <br/>
             <Button 
                 type="primary" 
                 htmlType="submit" 
-                onClick={this.createAccount}> Submit </Button>
+                onClick={this.createAccount}> 
+                <Link to='/'>Submit</Link>
+            </Button>
         </Form>
 
         </div>
