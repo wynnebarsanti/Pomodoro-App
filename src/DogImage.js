@@ -28,9 +28,9 @@ export default class DogImage extends React.Component{
         // of getauthor and display it on the webpage
         return(
             <div>
-            <Button type="primary" htmlType="submit" onClick={this.handleClick}>Generate motivational doggo</Button>
+            <Button type="primary" htmlType="submit" onClick={this.handleClick}>Generate doggo</Button>
             <div>
-            <img src={this.state.apiResponse} alt = "new" />
+            <img src={this.state.apiResponse} alt = "" />
             </div>
             </div>
         )
