@@ -5,6 +5,7 @@ import { version, Button } from "antd";
 import "antd/dist/antd.css";
 import firebase from "./firebase.js";
 import { BrowserRouter as Router, Redirect, Route, Link } from 'react-router-dom'
+import DogImage from './DogImage';
 
 
 class TimerBreak extends React.Component {
@@ -134,6 +135,7 @@ exitTimer()
                     <Button size= "large" type="primary" onClick={()=> {this.startCountDown()}}>Start Timer</Button>
                     <Button size= "large" type="secondary" onClick={()=> {this.pauseCountDown()}}>Pause Timer</Button>
                 </div>
+                <DogImage/>
                 {this.renderRedirect()}
             </header>
         </div>
