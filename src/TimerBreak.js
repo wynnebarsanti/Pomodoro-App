@@ -3,14 +3,18 @@ import React from 'react'
 import './Timer.css';
 import { version, Button } from "antd";
 import "antd/dist/antd.css";
-import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom'
 import firebase from "./firebase.js";
+import { BrowserRouter as Router, Redirect, Route, Link } from 'react-router-dom'
+import DogImage from './DogImage';
 
-class Timer extends React.Component {
+
+class TimerBreak extends React.Component {
     constructor(props)
     {
         super(props);
-        this.state = {display_sec: "00", display_min: "25", secondsRemaining: 1499, intervalHandle: "", redirect: false}
+        this.state = {display_sec: "00", display_min: "05", secondsRemaining: 299, intervalHandle: "", redirect: false,
+        uid: ""
+    }
     }
 
     //Binding Prevents async errors from occuring
@@ -37,8 +41,7 @@ class Timer extends React.Component {
             clearInterval(this.state.intervalHandle);
             this.setState({display_min: "00", display_sec: "00", secondsRemaining: 1500})
             this.setState({redirect: true})
-            this.sendUID();
-            //------------------------------------------------------------------------------------ROUTE TO TIMERLOG.js HERE
+        //------------------------------------------------------------------------------------ROUTE TO TIMERLOG.js HERE
         }
         //If statement that adjusts display for when the seconds go under 10 
         else if(sec < 10) 
@@ -78,20 +81,19 @@ class Timer extends React.Component {
         return (this.state.display_min + ":" + this.state.display_sec)
     }    
 
-
-    //Redirects to the Timer Log if "redirect" is true 
+    //Redirects to the timer page if "redirect" is true 
     renderRedirect = () => 
     {
         if (this.state.redirect) 
         {
-            return <Redirect to='/TimerLog' />
+            this.exitTimer()
+            return <Redirect to='/Timer' />
         }
     }
-    
-            
+        
     //Sends UID to the Profile Page
     sendUID = () => {
-        this.exitTimer()
+        this.exitTimer();
         firebase.auth().onAuthStateChanged(user => {
           if (user) {
               console.log("user is signed in")
@@ -107,40 +109,38 @@ class Timer extends React.Component {
         });
   }
 
-//Kills the timer when a button is clicked
+  //Kills the timer when a button is clicked
 exitTimer()
 {
     clearInterval(this.state.intervalHandle);
     this.setState({display_min: "00", display_sec: "00", secondsRemaining: 1500})
 }
 
-  render(){
+
+    render(){
         return(
         <div>
             <div className = "Timer-Header">
-               <Button 
+               Take a Break!
+                <Button
                     size= "large"
                     type="primary" onClick={() => {this.sendUID()}}>
                     Back to Profile
-                </Button>
-                <Button
-                    size= "large"
-                    type="primary" onClick={() => {this.exitTimer()}}> 
-                    <Link to='/TimerLog'>Stop Timer and Log Activity</Link>
                 </Button>                
                     
             </div>
-            <header className=" Timer-Body">
+            <header className="Timer-Body">
                 {this.updateDisplay()}
-                <div style={{ marginTop: "16px"}}>
+                   <div className="TimerBreak-Buttons">
                     <Button size= "large" type="primary" onClick={()=> {this.startCountDown()}}>Start Timer</Button>
                     <Button size= "large" type="secondary" onClick={()=> {this.pauseCountDown()}}>Pause Timer</Button>
-                </div>
+                 </div>
+                <DogImage/>
+                {this.renderRedirect()}
             </header>
-            {this.renderRedirect()}
         </div>
         );
     }
 }
 
-export default Timer
+export default TimerBreak

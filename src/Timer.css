@@ -1,0 +1,50 @@
+.Timer {
+    text-align: center;
+  }
+
+  .Timer-Header {
+    background: url("https://image.freepik.com/free-photo/blurred-background-blur-bookshelves-book-store-background-education-concept_7190-15.jpg");
+    height: 200px;
+    background-size: cover; 
+    background-position: center; 
+    font-size: 60px; 
+    color: black;
+    display: flex; 
+    align-items: flex-end; 
+    justify-content: space-between;
+   } 
+
+  .Timer-Body {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 150px;
+    color: white;
+  }
+  
+  .TimerBreak-Buttons{
+    background-color: #282c34;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 150px;
+    color: white;
+  }
+
+  .App-link {
+    color: #61dafb;
+  }
+  
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
