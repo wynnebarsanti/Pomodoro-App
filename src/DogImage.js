@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {Button} from 'antd';
+import Image from 'react-image-resizer';
 
 
 export default class DogImage extends React.Component{
@@ -9,7 +10,7 @@ export default class DogImage extends React.Component{
         this.state = 
         {
         apiResponse : '',      
-        temp : 'random',     
+        temp : 'random' 
     }
     }
 
@@ -30,7 +31,10 @@ export default class DogImage extends React.Component{
             <div>
             <Button type="primary" htmlType="submit" onClick={this.handleClick}>Generate doggo</Button>
             <div>
-            <img src={this.state.apiResponse} alt = "" />
+                <Image src={this.state.apiResponse} 
+                height={300}
+                width={300}
+                alt = "new" />
             </div>
             </div>
         )

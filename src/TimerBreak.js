@@ -129,12 +129,12 @@ exitTimer()
                 </Button>                
                     
             </div>
-            <header className=" Timer-Body">
+            <header className="Timer-Body">
                 {this.updateDisplay()}
-                <div style={{ marginTop: "16px"}}>
+                   <div className="TimerBreak-Buttons">
                     <Button size= "large" type="primary" onClick={()=> {this.startCountDown()}}>Start Timer</Button>
                     <Button size= "large" type="secondary" onClick={()=> {this.pauseCountDown()}}>Pause Timer</Button>
-                </div>
+                 </div>
                 <DogImage/>
                 {this.renderRedirect()}
             </header>
