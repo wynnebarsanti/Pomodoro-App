@@ -61,12 +61,18 @@ render(){
             <div className="header">
 
                 <b>Hello, {this.state.userObject.name}!</b>
-              
                 <Button 
                     className="button-timer" 
-                    size="large" 
+                    size="small" 
                     type="primary">
                     <Link to='/Timer'>Start Timer</Link>
+                </Button>
+
+                <Button 
+                    className="button-logout" 
+                    size="small" 
+                    type="primary">
+                    <Link to='/'>Logout</Link>
                 </Button>
             </div>
 
