@@ -10,12 +10,18 @@ import firebase from "./firebase.js";
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
 
 
+const setErrorMessage = (error) => {
+    return (
+        error
+    )
+}
 class LogIn extends React.Component{
 
     state = {
         username: "",
         password: "",
         userData: [],
+        loginMessage : '',
         //logInClicked: false,
     }
 
@@ -49,6 +55,7 @@ class LogIn extends React.Component{
             var errorCode = error.code;
             var errorMessage = error.message;
             console.log("User is not signed in")
+            setErrorMessage('Invalid username/password.');
             // ...
           });
     }
@@ -74,7 +81,7 @@ class LogIn extends React.Component{
     render(){
         return(
             <div className="login">
-                <h1>Pomodoro App</h1>
+                <h1>Pomodoro</h1>
                 <Form onClick={this.handleLogIn} className="login-form">
                         <Input
                             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
