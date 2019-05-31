@@ -29,6 +29,7 @@ displayLog = () => {
                 output.push({
                     title : userObject.log[item].work.title,
                     details : userObject.log[item].work.details,
+                    date : userObject.log[item].date,
                 });
             }
             console.log(output);
@@ -37,10 +38,13 @@ displayLog = () => {
                     return(
                    <div className="log">
                     <div className="log-title">
-                        <b>Project: {user.title};</b>
+                        <b>Project: {user.title}</b>
                     </div>
                     <div className="log-details">
-                        Details: {user.details};
+                        Details: {user.details}
+                    </div>
+                    <div className="log-date">
+                        Date: {user.date}
                     </div>
                 </div>
                     )
@@ -57,12 +61,18 @@ render(){
             <div className="header">
 
                 <b>Hello, {this.state.userObject.name}!</b>
-              
                 <Button 
                     className="button-timer" 
-                    size="large" 
+                    size="small" 
                     type="primary">
                     <Link to='/Timer'>Start Timer</Link>
+                </Button>
+
+                <Button 
+                    className="button-logout" 
+                    size="small" 
+                    type="primary">
+                    <Link to='/'>Logout</Link>
                 </Button>
             </div>
 

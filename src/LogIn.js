@@ -48,7 +48,7 @@ class LogIn extends React.Component{
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            console.log(errorMessage)
+            console.log("User is not signed in")
             // ...
           });
     }
@@ -61,6 +61,7 @@ class LogIn extends React.Component{
                 //let uid=currentUser[user].uid;
                 //console.log(uid);
               //let data = this.getData(currentUser);
+              
               this.props.history.push({pathname: '/Profile', state: {userUID: user.uid}});
             } else {
               // No user is signed in.
