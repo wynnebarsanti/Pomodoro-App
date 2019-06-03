@@ -2,7 +2,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './login.css';
-import { Form, Icon, Input, Button,  } from 'antd';
+import { Form, Icon, Input, Button, Alert, message } from 'antd';
 import NewAccount from "./NewAccount";
 import Profile from './Profile.js';
 import FirebaseLog from "./firebaseLog.js"
@@ -15,6 +15,11 @@ const setErrorMessage = (error) => {
         error
     )
 }
+
+const info = () => {
+    message.info('This is a normal message');
+    
+};
 class LogIn extends React.Component{
 
     state = {
@@ -22,6 +27,7 @@ class LogIn extends React.Component{
         password: "",
         userData: [],
         loginMessage : '',
+        loginError: false,
         //logInClicked: false,
     }
 
@@ -40,6 +46,15 @@ class LogIn extends React.Component{
         })
     }
 
+
+    errorMessage =() =>{
+        console.log('gets here')
+
+        this.setState({
+            loginError: true
+        })
+    }
+
     // if they enter info and login... 
     handleLogIn = () => {
         firebase.auth().signInWithEmailAndPassword(this.state.username, this.state.password)
@@ -54,11 +69,16 @@ class LogIn extends React.Component{
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
+            
             console.log("User is not signed in")
             setErrorMessage('Invalid username/password.');
             // ...
-          });
+          }).then(this.errorMessage);
     }
+
+
+
+      
     // check if their login info is correct
     checkSignin = (currentUser) => {
           firebase.auth().onAuthStateChanged(user => {
@@ -72,7 +92,8 @@ class LogIn extends React.Component{
               this.props.history.push({pathname: '/Profile', state: {userUID: user.uid}});
             } else {
               // No user is signed in.
-              console.log("Invalid Username or Password")
+              console.log("Invalid Username or Password");
+
             }
           });
     }
@@ -82,7 +103,8 @@ class LogIn extends React.Component{
         return(
             <div className="login">
                 <h1>Pomodoro</h1>
-                <Form onClick={this.handleLogIn} className="login-form">
+                <Form  className="login-form">
+                        {this.state.loginError ? <Alert message="Invalid username or password, try again" type="error" /> : <div></div>}
                         <Input
                             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
                             placeholder="Username"
@@ -96,7 +118,7 @@ class LogIn extends React.Component{
                             onChange={(e)=>this.changePassword(e.target.value)}
                         />
 
-                        <Button type="primary" htmlType="submit" className="login-form-button">
+                        <Button type="primary" onClick={this.handleLogIn} className="login-form-button">
                             Log in
                             {/* <Link to='/Profile'>Log In</Link> */}
                         </Button>
