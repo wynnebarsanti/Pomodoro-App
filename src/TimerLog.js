@@ -159,6 +159,7 @@ sendUID = () => {
                     type="primary" onClick={() => {this.sendUID()}}>
                         Back to Profile
                 </Button>
+                <div>Log Your Activity</div>
                 <Button
                     size= "large"
                     type="primary">

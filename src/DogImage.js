@@ -34,7 +34,7 @@ export default class DogImage extends React.Component{
                 <Image src={this.state.apiResponse} 
                 height={300}
                 width={300}
-                alt = "new" />
+                alt = "" />
             </div>
             </div>
         )

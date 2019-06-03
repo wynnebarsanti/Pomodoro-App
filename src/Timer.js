@@ -118,11 +118,13 @@ exitTimer()
         return(
         <div>
             <div className = "Timer-Header">
+                
                <Button 
                     size= "large"
                     type="primary" onClick={() => {this.sendUID()}}>
                     Back to Profile
                 </Button>
+                <div>Get to work!</div>
                 <Button
                     size= "large"
                     type="primary" onClick={() => {this.exitTimer()}}> 

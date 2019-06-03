@@ -44,7 +44,7 @@ displayLog = () => {
                         Details: {user.details}
                     </div>
                     <div className="log-date">
-                        Date: {user.date}
+                        {user.date}
                     </div>
                 </div>
                     )
